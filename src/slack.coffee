@@ -221,7 +221,8 @@ class SlackBot extends Adapter
       # images will be accessed anonymously.
       attachment = if (msg.match(/^https?:\/\/\S+\.(?:jpg|jpe|jpeg|png|gif|bmp|dib)/) or
                    msg.match(/^https?:\/\/images.duckduckgo.com\//)) and
-                   !msg.match(/https:\/\/files\.slack\.com/)
+                   !msg.match(/https:\/\/files\.slack\.com/) and
+                   !msg.match(/https?:\/\/[a-zA-Z0-9\-_]+\.slack\.com\/archive/)
         @robot.logger.debug "Sending to #{envelope.room} as image: #{msg}"
         {image_url: msg, fallback: msg}
       else
